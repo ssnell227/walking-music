@@ -1,26 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { SearchBar } from './components/search-bar/search-bar'
+import { SearchDisplay } from './components/search-display/search-display'
+import { WalkableDisplay } from './components/walkable-display/walkable-display'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const returnedList = []
+
+class ReturnedItem {
+  constructor(id) {
+    this.id = id
+    this.primary = 'Primary Title'
+    this.secondary = 'Secondary Title'
+    this.tertiary = 'Tertiary Title'
+    this.coverImageURL = '../testAlbumImage.png'
+  }
+}
+
+function populateList() {
+  for (let i = 0; i < 7; i++) {
+    returnedList.push(new ReturnedItem(i))
+  }
+}
+
+populateList()
+
+
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    //hard coded example state.  Will be info from returned Spotify
+    this.state = {
+      returnedList: returnedList,
+    }
+  }
+  render() {
+    return (
+      <div className="App">
+        <SearchBar />
+        <SearchDisplay returnedList={this.state.returnedList} />
+        <WalkableDisplay />
+      </div>
+    );
+  }
 }
 
 export default App;
