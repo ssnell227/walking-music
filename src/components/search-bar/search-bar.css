@@ -1,0 +1,13 @@
+.search-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    min-width: 600px;
+    width: 60%;
+    height: 100%;
+    margin: 10px 40px;
+    padding: 10px;
+    font-size: 50px;
+}
