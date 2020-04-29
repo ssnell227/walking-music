@@ -3,8 +3,14 @@ import './App.css';
 import { SearchBar } from './components/search-bar/search-bar'
 import { SearchDisplay } from './components/search-display/search-display'
 import { WalkableDisplay } from './components/walkable-display/walkable-display'
+import {authenticate} from './utils/authenticate'
+
+import testAlbumImage from './testAlbumImage.png'
+
+authenticate() //get auth token from Spotify via implicit grant
 
 const returnedList = []
+
 
 class ReturnedItem {
   constructor(id) {
@@ -12,7 +18,7 @@ class ReturnedItem {
     this.primary = 'Primary Title'
     this.secondary = 'Secondary Title'
     this.tertiary = 'Tertiary Title'
-    this.coverImageSRC = './testAlbumImage.png'
+    this.coverImageSRC = testAlbumImage
   }
 }
 
