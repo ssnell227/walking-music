@@ -4,6 +4,7 @@ import { SearchBar } from './components/search-bar/search-bar'
 import { SearchDisplay } from './components/search-display/search-display'
 import { WalkableDisplay } from './components/walkable-display/walkable-display'
 import {authenticate} from './utils/authenticate'
+import {spotify} from './utils/spotify.js'
 
 import testAlbumImage from './testAlbumImage.png'
 
@@ -40,14 +41,26 @@ class App extends React.Component {
       returnedList: returnedList,
     }
     this.getSearchTerms = this.getSearchTerms.bind(this)
+    this.runSearch = this.runSearch.bind(this)
   }
   getSearchTerms (searchTerms) {
-    console.log(searchTerms)
+    let searchArray = searchTerms.split(' ')
+    console.log(searchArray)
+    this.setState({
+      searchTerms: searchArray
+    })
+  }
+  runSearch (searchArray) {
+    spotify.search(searchArray).then(response => {
+      this.setState ({
+        returnedList: response,
+      })
+    })
   }
   render() {
     return (
       <div className="App">
-        <SearchBar getSearchTerms={this.getSearchTerms}/>
+        <SearchBar runSearch={this.runSearch}/>
         <SearchDisplay returnedList={this.state.returnedList} />
         <WalkableDisplay />
       </div>

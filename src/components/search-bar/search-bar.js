@@ -10,7 +10,7 @@ export class SearchBar extends React.Component {
         this.handleSearch = this.handleSearch.bind(this)
     }
     handleSearch(e) {
-        this.props.getSearchTerms(e.target.value)
+        this.props.runSearch(e.target.value)
     }
     render () {
         return (

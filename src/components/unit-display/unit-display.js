@@ -6,7 +6,6 @@ export class UnitDisplay extends React.Component {
         if (!this.props.item) {
             return null
         }
-        console.log(this.props.item.coverImageSRC)
         return (
             <div className='unit-container'>
                 <div className='image-container'>
