@@ -1,4 +1,5 @@
 import React from 'react'
+import './search-display.css'
 import {UnitDisplay} from '../unit-display/unit-display'
 
 

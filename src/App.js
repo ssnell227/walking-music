@@ -12,7 +12,7 @@ class ReturnedItem {
     this.primary = 'Primary Title'
     this.secondary = 'Secondary Title'
     this.tertiary = 'Tertiary Title'
-    this.coverImageURL = '../testAlbumImage.png'
+    this.coverImageSRC = './testAlbumImage.png'
   }
 }
 
@@ -33,11 +33,15 @@ class App extends React.Component {
     this.state = {
       returnedList: returnedList,
     }
+    this.getSearchTerms = this.getSearchTerms.bind(this)
+  }
+  getSearchTerms (searchTerms) {
+    console.log(searchTerms)
   }
   render() {
     return (
       <div className="App">
-        <SearchBar />
+        <SearchBar getSearchTerms={this.getSearchTerms}/>
         <SearchDisplay returnedList={this.state.returnedList} />
         <WalkableDisplay />
       </div>
