@@ -34,14 +34,14 @@ populateList()
 
 export const spotify = {
     search (terms) {
-    let endpoint = `https://api.spotify.com/v1/search?q=${terms.split(' ').join('+')}`
+    let endpoint = `https://api.spotify.com/v1/search?q=${terms.split(' ').join('+')}&type=album,artist,playlist`
     console.log(endpoint)
         return fetch(
             endpoint, {
             headers: {Authorization: 'Bearer ' + token},
-        }).then(response => {
-            response.json()
-        }).then(jsonResponse => {
+        })
+        .then(response => response.json())
+        .then(jsonResponse => {
             console.log(jsonResponse)
             return returnedList
         })
