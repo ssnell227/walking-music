@@ -33,8 +33,8 @@ populateList()
 //spotify.search() IS working-- it's passing the object all the way down to the unit-display
 
 export const spotify = {
-    search (terms) {
-    let endpoint = `https://api.spotify.com/v1/search?q=${terms.split(' ').join('+')}&type=album,artist,playlist`
+    search (query, selector) {
+    let endpoint = `https://api.spotify.com/v1/search?q=${query.split(' ').join('+')}&type=${selector}`
     console.log(endpoint)
         return fetch(
             endpoint, {

@@ -50,8 +50,8 @@ class App extends React.Component {
       searchTerms: searchArray
     })
   }
-  runSearch (searchArray) {
-    spotify.search(searchArray).then(response => {
+  runSearch (searchArray, selector) {
+    spotify.search(searchArray, selector).then(response => {
       this.setState ({
         returnedList: response,
       })
