@@ -20,3 +20,14 @@
     width: 150px;
     height: 50px;
 }
+
+.search-bar li {
+    display: unset;
+    margin: 1vw;
+    padding: 1vw;
+    width: 150px;
+    height: 50px;
+    background-color: grey;
+    font-weight: bold;
+    cursor: pointer;
+}

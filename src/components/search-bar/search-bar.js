@@ -21,6 +21,7 @@ export class SearchBar extends React.Component {
         this.setState({
             searchSelector: selector
         })
+        console.log(selector)
     }
 
     handleSearch(e) {
@@ -36,7 +37,7 @@ export class SearchBar extends React.Component {
     }
 
     renderSelectorOptions() {
-        return Object.keys(this.selectors).map(selector => {
+        return Object.values(this.selectors).map(selector => {
             const selectorValue = selector;
             return <li 
             onClick={this.handleSelectorChange.bind(this, selectorValue)}

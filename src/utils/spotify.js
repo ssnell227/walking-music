@@ -1,6 +1,6 @@
 //must include function to fetch GET via search parameters for a list of responses and return an object
 //also must include GET requests for album, artist, or playlist
-import {authenticate} from './authenticate'
+import { authenticate } from './authenticate'
 
 import testAlbumImage from '../testAlbumImage.png'
 
@@ -33,17 +33,23 @@ populateList()
 //spotify.search() IS working-- it's passing the object all the way down to the unit-display
 
 export const spotify = {
-    search (query, selector) {
+  search(query, selector) {
     let endpoint = `https://api.spotify.com/v1/search?q=${query.split(' ').join('+')}&type=${selector}`
     console.log(endpoint)
-        return fetch(
-            endpoint, {
-            headers: {Authorization: 'Bearer ' + token},
+    return fetch(
+      endpoint, {
+      headers: { Authorization: 'Bearer ' + token },
+    })
+      .then(response => response.json())
+      .then(jsonResponse => {
+        console.log(jsonResponse)
+        return jsonResponse['albums']['items'].map(element => ({
+          id: element['id'],
+          primary: element['name'],
+          secondary: element["artists"]['name'],
+          tertiary: null,
+          coverImageSRC: element['images'][0]['url'],
+        }))
         })
-        .then(response => response.json())
-        .then(jsonResponse => {
-            console.log(jsonResponse)
-            return returnedList
-        })
-    }
+  }
 }
