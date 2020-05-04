@@ -2,54 +2,56 @@
 //also must include GET requests for album, artist, or playlist
 import { authenticate } from './authenticate'
 
-import testAlbumImage from '../testAlbumImage.png'
-
 const token = authenticate();
 
-//temporary dev
-const returnedList = []
-
-
-class ReturnedItem {
-  constructor(id) {
-    this.id = id
-    this.primary = 'Returned'
-    this.secondary = 'Secondary Title'
-    this.tertiary = 'Tertiary Title'
-    this.coverImageSRC = testAlbumImage
-  }
-}
-
-function populateList() {
-  for (let i = 0; i < 7; i++) {
-    returnedList.push(new ReturnedItem(i))
-  }
-}
-
-populateList()
-
-//temporary dev
-//my search endpoint is coming up with no results, so I've hard-coded what the results should look like
-//spotify.search() IS working-- it's passing the object all the way down to the unit-display
 
 export const spotify = {
   search(query, selector) {
     let endpoint = `https://api.spotify.com/v1/search?q=${query.split(' ').join('+')}&type=${selector}`
-    console.log(endpoint)
     return fetch(
       endpoint, {
       headers: { Authorization: 'Bearer ' + token },
     })
       .then(response => response.json())
       .then(jsonResponse => {
-        console.log(jsonResponse)
-        return jsonResponse['albums']['items'].map(element => ({
-          id: element['id'],
-          primary: element['name'],
-          secondary: element["artists"]['name'],
-          tertiary: null,
-          coverImageSRC: element['images'][0]['url'],
-        }))
-        })
+
+        if(selector === 'artist') {
+          let cleanResponse = jsonResponse['artists']['items'].filter (element => element['images'].length > 0)
+          return cleanResponse.map(element => (
+            {
+            id: element['id'],
+            primary: element['name'],
+            secondary: null,
+            tertiary: null,
+            coverImageSRC: element['images'][0]['url'],
+          }))
+        }else if (selector === 'album') {
+          let cleanResponse = jsonResponse['artists']['items'].filter (element => element['images'].length > 0)
+          return cleanResponse['albums']['items'].map(element => ({
+            id: element['id'],
+            primary: element['name'],
+            secondary: element["artists"]['name'],
+            tertiary: null,
+            coverImageSRC: element['images'][0]['url'],
+          }))
+        } else if (selector === 'playlist'){
+          let cleanResponse = jsonResponse['artists']['items'].filter (element => element['images'].length > 0)
+          return cleanResponse['playlists']['items'].map(element => ({
+            id: element['id'],
+            primary: element['name'],
+            secondary: null,
+            tertiary: null,
+            coverImageSRC: element['images'][0]['url'],
+          }))
+        } else {
+          return {
+            id: '000',
+            primary: 'Unavailable',
+            secondary: null,
+            tertiary: null,
+            coverImageSRC: 'http://claw.wdfiles.com/local--files/music-ui/albumart.jpg'
+          }
+        }
+      })
   }
 }

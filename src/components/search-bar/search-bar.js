@@ -2,7 +2,7 @@ import React from 'react'
 import './search-bar.css'
 
 export class SearchBar extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.state = {
             searchSelector: "artist",
@@ -12,12 +12,12 @@ export class SearchBar extends React.Component {
             'Album': 'album',
             'Playlist': 'playlist'
         }
-        
+
         this.handleSearch = this.handleSearch.bind(this)
         this.handleSelectorChange = this.handleSelectorChange.bind(this)
-        }
+    }
 
-    handleSelectorChange (selector) {
+    handleSelectorChange(selector) {
         this.setState({
             searchSelector: selector
         })
@@ -25,10 +25,12 @@ export class SearchBar extends React.Component {
     }
 
     handleSearch(e) {
-        this.props.runSearch(e.target.value, this.state.searchSelector)
+        if (e.target.value) {
+            this.props.runSearch(e.target.value, this.state.searchSelector)
+        }
     }
 
-    getSelectorClass (selector) {
+    getSelectorClass(selector) {
         if (this.state.searchSelector === selector) {
             return 'active'
         } else {
@@ -39,20 +41,20 @@ export class SearchBar extends React.Component {
     renderSelectorOptions() {
         return Object.values(this.selectors).map(selector => {
             const selectorValue = selector;
-            return <li 
-            onClick={this.handleSelectorChange.bind(this, selectorValue)}
-            className={this.getSelectorClass(selectorValue)} 
-            key={selectorValue}>{selector}</li>
+            return <li
+                onClick={this.handleSelectorChange.bind(this, selectorValue)}
+                className={this.getSelectorClass(selectorValue)}
+                key={selectorValue}>{selector}</li>
         })
     }
 
-    render () {
+    render() {
         return (
             <div className='search-bar'>
                 <input onChange={this.handleSearch} type='text' placeholder='Artist, album, playlist...'></input>
                 <label>Search for:</label>
                 <div className='button-container'>
-                <ul>{this.renderSelectorOptions()}</ul>
+                    <ul>{this.renderSelectorOptions()}</ul>
                 </div>
             </div>
         )
