@@ -31,16 +31,18 @@ function populateList() {
 }
 
 
-
+//gotta build hardcoded walking music object to display while I'm working
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       returnedList: returnedList,
+      walkingMusic: walkingMusic
     }
     this.getSearchTerms = this.getSearchTerms.bind(this)
     this.runSearch = this.runSearch.bind(this)
+    this.runWalkingMusic = this.runWalkingMusic.bind(this)
   }
   getSearchTerms (searchTerms) {
     let searchArray = searchTerms.split(' ')
@@ -56,6 +58,13 @@ class App extends React.Component {
       })
     })
   }
+  runWalkingMusic (id, selector) {
+    spotify.walkingMusic(id, selector).then(response => {
+      this.setState ({
+        walkingMusic: response
+      })
+    })
+  }
   componentDidMount() {
     authenticate()
     populateList()
@@ -64,8 +73,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <SearchBar runSearch={this.runSearch}/>
-        <SearchDisplay returnedList={this.state.returnedList} />
-        <TracksDisplay/>
+        <SearchDisplay returnedList={this.state.returnedList} runWalkingMusic={this.runWalkingMusic}/>
+        <TracksDisplay walkingMusic={this.state.walkingMusic}/>
       </div>
     );
   }
