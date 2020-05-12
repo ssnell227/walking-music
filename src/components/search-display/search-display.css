@@ -4,4 +4,6 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     width: 60%;
     margin: auto;
+    padding: 10px;
+    
 }

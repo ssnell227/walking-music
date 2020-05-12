@@ -52,9 +52,11 @@ export class SearchBar extends React.Component {
         return (
             <div className='search-bar'>
                 <input onChange={this.handleSearch} type='text' placeholder='Artist, album, playlist...'></input>
+                <div className='selectors'>
                 <label>Search for:</label>
                 <div className='button-container'>
                     <ul>{this.renderSelectorOptions()}</ul>
+                </div>
                 </div>
             </div>
         )

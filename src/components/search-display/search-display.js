@@ -17,13 +17,14 @@ export class SearchDisplay extends React.Component {
                 //get the selector from the state in app?
                 this.props.runWalkingMusic(e.target.key, this.props.returnedList.selector)
             }
+            console.log('working')
     }
     render() {
         return (
             <div className='display-container'>
                 {
                     this.props.returnedList.map(item => {
-                        return <UnitDisplay onclick={this.handleWalkingMusic} key={item.id} item={item} />
+                        return <UnitDisplay onClick={this.handleWalkingMusic} key={item.id} item={item} />
                     })
                 }
             </div>

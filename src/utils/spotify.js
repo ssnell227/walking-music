@@ -27,8 +27,9 @@ export const spotify = {
               type: selector,
             }))
         } else if (selector === 'album') {
-          let cleanResponse = jsonResponse['artists']['items'].filter(element => element['images'].length > 0)
-          return cleanResponse['albums']['items'].map(element => ({
+          let cleanResponse = jsonResponse['albums']['items'].filter(element => element['images'].length > 0)
+          console.log(cleanResponse)
+          return cleanResponse.map(element => ({
             id: element['id'],
             primary: element['name'],
             secondary: element["artists"]['name'],
@@ -37,8 +38,8 @@ export const spotify = {
             type: selector
           }))
         } else if (selector === 'playlist') {
-          let cleanResponse = jsonResponse['artists']['items'].filter(element => element['images'].length > 0)
-          return cleanResponse['playlists']['items'].map(element => ({
+          let cleanResponse = jsonResponse['playlists']['items'].filter(element => element['images'].length > 0)
+          return cleanResponse.map(element => ({
             id: element['id'],
             primary: element['name'],
             secondary: null,
@@ -68,14 +69,14 @@ export const spotify = {
       })
         .then(response => response.json())
         .then(jsonResponse => {
-          return jsonResponse['tracks'].map(item => {
-             ({
-              id = item['id'],
-              primary = item['name'],
-              secondary = item['artists'][0]['name'],
-              tertiary = item['album']['name'],
-            })
-          })
+          return jsonResponse['tracks'].map(element => ({
+            
+              id: element['id'],
+              primary: element['name'],
+              secondary: element['artists'][0]['name'],
+              tertiary: element['album']['name'],
+            
+          }))
         })
     }
   }

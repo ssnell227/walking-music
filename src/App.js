@@ -38,7 +38,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       returnedList: returnedList,
-      walkingMusic: walkingMusic
+      walkingMusic: returnedList
     }
     this.getSearchTerms = this.getSearchTerms.bind(this)
     this.runSearch = this.runSearch.bind(this)

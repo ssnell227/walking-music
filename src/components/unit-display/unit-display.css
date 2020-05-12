@@ -1,15 +1,21 @@
 .unit-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background: grey;
+    display: inline-block;
+    background: white;
     height: 100%;
     width: 100%;
+    border-radius: 20px;
+}
+
+.unit-container h1 {
+    font-size: 20px;
+    
 }
 
 img {
     width: 100px;
     height: 100px;
+    margin: 5px;
+    border-radius: 25%;
+    float: left;
 }
 
