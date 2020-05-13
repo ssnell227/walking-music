@@ -59,23 +59,22 @@ export const spotify = {
         }
       })
   },
-  //still endpoint from above
+
   walkingSongs(id, selector) {
     if (selector === 'artist') {
-      let endpoint = `https://api.spotify.com/v1/artists/${id}/top-tracks`
+      let endpoint = `https://api.spotify.com/v1/artists/${id}/top-tracks?country=from_token`
       return fetch(
         endpoint, {
         headers: { Authorization: 'Bearer ' + token },
       })
         .then(response => response.json())
         .then(jsonResponse => {
+          console.log(jsonResponse)
           return jsonResponse['tracks'].map(element => ({
-            
               id: element['id'],
               primary: element['name'],
               secondary: element['artists'][0]['name'],
               tertiary: element['album']['name'],
-            
           }))
         })
     }

@@ -2,12 +2,17 @@ import React from 'react'
 import './unit-display.css'
 
 export class UnitDisplay extends React.Component {
+    handleWalkingMusic = () => {
+        this.props.runWalkingMusic(this.props.item.id, this.props.item.type)
+    }
+
+
     render() {
         if (!this.props.item) {
             return null
         }
         return (
-            <div className='unit-container'>
+            <div onClick={this.handleWalkingMusic} className='unit-container'>
                 <div className='image-container'>
                     <img src={this.props.item.coverImageSRC} alt='' />
                 </div>

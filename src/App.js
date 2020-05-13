@@ -37,8 +37,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      returnedList: returnedList,
-      walkingMusic: returnedList
+      returnedList: null,
+      walkingMusic: null
     }
     this.getSearchTerms = this.getSearchTerms.bind(this)
     this.runSearch = this.runSearch.bind(this)
@@ -59,7 +59,7 @@ class App extends React.Component {
     })
   }
   runWalkingMusic (id, selector) {
-    spotify.walkingMusic(id, selector).then(response => {
+    spotify.walkingSongs(id, selector).then(response => {
       this.setState ({
         walkingMusic: response
       })
@@ -71,7 +71,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="App">
+      <div  className="App">
         <SearchBar runSearch={this.runSearch}/>
         <SearchDisplay returnedList={this.state.returnedList} runWalkingMusic={this.runWalkingMusic}/>
         <TracksDisplay walkingMusic={this.state.walkingMusic}/>
